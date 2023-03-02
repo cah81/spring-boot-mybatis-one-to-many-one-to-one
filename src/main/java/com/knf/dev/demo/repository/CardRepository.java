@@ -25,4 +25,9 @@ public interface CardRepository {
     @Select("SELECT users.name, users.email FROM " +
             "users WHERE users.email = #{email}")
     User getUser(String email);
+
+
+
+
+
 }

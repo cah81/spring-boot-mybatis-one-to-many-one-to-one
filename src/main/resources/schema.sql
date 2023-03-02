@@ -1,5 +1,6 @@
 CREATE TABLE IF NOT EXISTS users
     (
+
         email CHARACTER VARYING(30) NOT NULL,
         name CHARACTER VARYING(30),
         PRIMARY KEY (email)
