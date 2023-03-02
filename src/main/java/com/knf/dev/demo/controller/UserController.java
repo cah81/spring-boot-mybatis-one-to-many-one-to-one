@@ -40,6 +40,14 @@ public class UserController {
                 response.put("created",Boolean.TRUE): response.put("created",Boolean.FALSE);
         return response;
     }
+
+    @PostMapping("/cards")
+    public Map<String,Boolean> createCard(@RequestBody Card card){
+        Map<String,Boolean> response = new HashMap<>();
+        Boolean bool = cardRepository.insert(card) > 0?
+                response.put("created",Boolean.TRUE): response.put("created",Boolean.FALSE);
+        return response;
+    }
     @PutMapping("/users/{id}")
     public Map<String,Boolean> updateUser(@PathVariable Integer id,@RequestBody User userDetails){
         User user = userRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("User not exist with id : " + id));
@@ -51,8 +59,8 @@ public class UserController {
         return response;
     }
     @GetMapping("/cards")
-    public List<Card> getAllUsers(){
-        return userRepository.getCards();
+    public List<Card> getAllCards(){
+        return cardRepository.getCards();
     }
 
 }

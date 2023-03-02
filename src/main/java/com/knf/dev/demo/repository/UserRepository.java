@@ -21,27 +21,18 @@ public interface UserRepository {
          many=@Many(select="getCards"))
                       })
     User selectUserById(String email);
-    //buscar por email o id en este caso
+
     @Select("SELECT cards.id, cards.cardnumber, cards.cardtype, " +
             "cards.email FROM cards WHERE cards.email = #{email}")
     @Results(value = {
             @Result(property = "cardNumber", column = "cardnumber"),
             @Result(property = "cardType", column = "cardtype")
     })
-    List<Card> getCardsByEmail(String email);
-    //lista de emails
-    @Select("SELECT * FROM cards")
-    @Results(value = {
-            @Result(property = "cardNumber", column = "cardnumber"),
-            @Result(property = "cardType", column = "cardtype"),
-            @Result(property = "email",column = "email")
-    })
-    List<Card> getCards();
+    List<Card> getCards(String email);
 
     @Insert("INSERT INTO users(email,name)" +
             "VALUES(#{email},#{name})")
     int insert(User user);
-
 
     @Update("update users set email=#{email},  " +
             "name=#{name}, where id =#{id}"
