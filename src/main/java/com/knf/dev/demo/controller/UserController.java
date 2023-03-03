@@ -24,7 +24,14 @@ public class UserController {
     @GetMapping("users/{email}")
     public User getUserById(@PathVariable String email)
      {
-      return userRepository.selectUserById(email);
+
+         User user = userRepository.selectUserById(email);
+
+         if(user==null){
+             throw  new ResourceNotFoundException("User not exist with email : " + email);
+         }
+
+         return user;
      }
 
     @GetMapping("cards/{id}")
